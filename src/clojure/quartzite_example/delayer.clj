@@ -11,28 +11,27 @@
         message (data "message")]
     (println message)))
 
-(defn- build-trigger []
+(defn- build-trigger [seconds]
   (t/build
-    (t/with-identity (t/key "triggers.1"))
     (t/start-now)
-    (t/with-schedule (s/schedule (s/repeat-forever) (s/with-interval-in-seconds 2)))))
+    (t/with-schedule (s/schedule (s/repeat-forever) (s/with-interval-in-seconds seconds)))))
 
 (defn- build-job [message]
   (j/build
     (j/of-type SimpleJob)
-    (j/using-job-data {"message" message})
-    (j/with-identity (j/key "jobs.noop.1"))))
+    (j/using-job-data {"message" message})))
 
 (defn- build-scheduler []
   (-> (qs/initialize)qs/start))
 
 (def scheduler (memoize build-scheduler))
 
-(defn schedule [message]
-    (let [trigger (build-trigger)
-          job     (build-job message)]
+(defn schedule [message seconds]
+  (let [trigger (build-trigger seconds)
+        job     (build-job message)]
     (qs/schedule (scheduler) job trigger)))
 
 (defn init []
   (println "starting quartzite")
-  (schedule "every 2 seconds"))
+  (schedule "every 2 seconds" 2)
+  (schedule "every 5 seconds" 5))

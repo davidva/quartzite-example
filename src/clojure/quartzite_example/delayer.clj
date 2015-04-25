@@ -23,11 +23,15 @@
     (j/using-job-data {"message" message})
     (j/with-identity (j/key "jobs.noop.1"))))
 
+(defn- build-scheduler []
+  (-> (qs/initialize)qs/start))
+
+(def scheduler (memoize build-scheduler))
+
 (defn schedule [message]
-    (let [scheduler (-> (qs/initialize)qs/start)
-          trigger   (build-trigger)
-          job       (build-job message)]
-    (qs/schedule scheduler job trigger)))
+    (let [trigger (build-trigger)
+          job     (build-job message)]
+    (qs/schedule (scheduler) job trigger)))
 
 (defn init []
   (println "starting quartzite")

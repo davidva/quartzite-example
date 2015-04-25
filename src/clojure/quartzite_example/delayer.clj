@@ -34,5 +34,4 @@
 
 (defn init []
   (println "starting quartzite")
-  (schedule "every 2 seconds" 2)
-  (schedule "every 5 seconds" 5))
+  (scheduler))

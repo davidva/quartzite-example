@@ -22,6 +22,7 @@
     (j/using-job-data {"message" message})))
 
 (defn- build-scheduler []
+  (println "building scheduler")
   (-> (qs/initialize)qs/start))
 
 (def scheduler (memoize build-scheduler))

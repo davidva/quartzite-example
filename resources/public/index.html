@@ -1,11 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>quartzite example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   </head>
   <body>
-    <h1>quartzite example</h1>
-    <form action="/schedule" method="post">
-      <input name="message" type="text">
-      <input type="submit">
-    </form>
+    <div class="container">
+      <h1>quartzite example</h1>
+      <form class="form-inline" action="/schedule" method="post">
+        <div class="form-group">
+          <input name="message" type="text" placeholder="Enter message">
+        </div>
+        <input class="btn btn-default" type="submit">
+      </form>
+    </div>
   </body>
 </html>

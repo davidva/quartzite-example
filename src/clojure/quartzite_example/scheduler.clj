@@ -1,4 +1,4 @@
-(ns quartzite-example.delayer
+(ns quartzite-example.scheduler
   (:require [clojurewerkz.quartzite.scheduler :as qs]
             [clojurewerkz.quartzite.conversion :as qc]
             [clojurewerkz.quartzite.triggers :as t]

@@ -8,7 +8,7 @@
                  [clojurewerkz/quartzite "2.0.0"]]
   :source-paths ["src/clojure"]
   :plugins [[lein-ring "0.8.13"]]
-  :ring {:init quartzite-example.delayer/init
+  :ring {:init quartzite-example.scheduler/init
          :handler quartzite-example.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]

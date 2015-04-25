@@ -3,7 +3,7 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.util.response :refer [resource-response content-type redirect]]
-            [quartzite-example.delayer :refer [schedule]]))
+            [quartzite-example.scheduler :refer [schedule]]))
 
 (defroutes app-routes
   (GET "/" [] (-> (resource-response "index.html" {:root "public"}) (content-type "text/html")))

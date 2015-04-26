@@ -5,6 +5,15 @@ var updateJobScheduledCounter = function() {
   $(".jobs-scheduled-counter").text("" + jobsScheduledCounter);
 }
 
+var updateJobTriggeredCounter = function() {
+  $.ajax({
+    url: "/counter"
+  }).done(function(data) {
+    $(".jobs-triggered-counter").text("" + data.counter);
+    setTimeout(updateJobTriggeredCounter, 5000);
+  });
+}
+
 var scheduleJob = function(message) {
   $.ajax({
     url: "/schedule",
@@ -20,6 +29,7 @@ var scheduleJob = function(message) {
 
 $(document).ready(function() {
   updateJobScheduledCounter();
+  updateJobTriggeredCounter();
 
 	form.on("submit", function() {
     var message = $("input[name='message']").val();

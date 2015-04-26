@@ -4,17 +4,20 @@
             [clojurewerkz.quartzite.triggers :as t]
             [clojurewerkz.quartzite.jobs :as j]
             [clojurewerkz.quartzite.jobs :refer [defjob]]
-            [clojurewerkz.quartzite.schedule.simple :as s]))
+            [clojurewerkz.quartzite.schedule.simple :as s]
+            [clj-time.core :as time]))
+
+(def triggered-counter (atom 0))
 
 (defjob SimpleJob [ctx]
   (let [data (qc/from-job-data ctx)
         message (data "message")]
+    (swap! triggered-counter inc)
     (println message)))
 
 (defn- build-trigger [seconds]
   (t/build
-    (t/start-now)
-    (t/with-schedule (s/schedule (s/repeat-forever) (s/with-interval-in-seconds seconds)))))
+    (t/start-at (time/plus (time/now) (time/seconds 2)))))
 
 (defn- build-job [message]
   (j/build

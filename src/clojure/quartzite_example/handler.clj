@@ -9,7 +9,7 @@
   (GET "/" [] (-> (resource-response "index.html" {:root "public"}) (content-type "text/html")))
   (POST "/schedule" {params :params}
     (schedule (params :message) 2)
-    (redirect "/"))
+    {:status 200})
   (route/not-found "Not Found"))
 
 (def app
